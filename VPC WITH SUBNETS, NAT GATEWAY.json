@@ -1,0 +1,110 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "trying to create sample arch",
+    "Resources": {
+        "myVPC": {
+            "Description": "This is VPC",
+            "Type": "AWS::EC2::VPC",
+            "Properties": {
+                "CidrBlock": "10.100.0.0/16",
+                "EnableDnsHostnames": true,
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "From CF"
+                    }
+                ]
+            }
+        },
+        "subnet1": {
+            "Description": "first subnet",
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "eu-north-1a",
+                "CidrBlock": "10.100.0.0/24",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Subnet1"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "myVPC"
+                }
+            }
+        },
+        "subnet2": {
+            "Description": "first subnet",
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "eu-north-1b",
+                "CidrBlock": "10.100.1.0/24",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Subnet2"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "myVPC"
+                }
+            }
+        },
+        "subnet3": {
+            "Description": "first subnet",
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "eu-north-1c",
+                "CidrBlock": "10.100.2.0/24",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Subnet3"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "myVPC"
+                }
+            }
+        },
+        "subnet4": {
+            "Description": "first subnet",
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "eu-north-1a",
+                "CidrBlock": "10.100.3.0/24",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Subnet4"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "myVPC"
+                }
+            }
+        },
+        "learningigw": {
+            "Type": "AWS::EC2::InternetGateway",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "From CF"
+                    }
+                ]
+            }
+        },
+        "AttachGateway": {
+            "Type": "AWS::EC2::VPCGatewayAttachment",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "myVPC"
+                },
+                "InternetGatewayId": {
+                    "Ref": "learningigw"
+                }
+            }
+        }
+    }
+}

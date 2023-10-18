@@ -1,0 +1,36 @@
+Parameters:
+  MyBucketName:
+    Type: String
+    Description: Enter the bucket name
+    Default: cam02023
+
+Resources:
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: 
+        Ref: MyBucketName
+
+  MyBucketPolicy:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub ${MyBucketName}
+      AceessControl: PublicRead   
+      PublicAccessBlockConfiguration:
+      BlockPublicAcls: false
+      BlockPublicPolicy: false
+      IgnorePublicpolicy: false
+      RestrictPublicBuckets: false
+        Ref: MyS3Bucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Action:
+              - 's3:GetObject'
+            Effect: Allow
+            Resource: !Join
+              - ''
+              - - 'arn:aws:s3:::'
+                -  !Ref MyS3Bucket
+                - /*
+            Principal: '*'

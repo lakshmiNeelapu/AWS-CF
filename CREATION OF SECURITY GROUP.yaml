@@ -1,0 +1,14 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+  "Resources" : {
+    "myStackWithParams" : {
+      "Type" : "AWS::CloudFormation::Stack",
+      "Properties" : {
+        "TemplateURL" : "https://qtcommonstate.s3.ap-south-1.amazonaws.com/main.json",
+        "Parameters" : {
+          "vpcid" : "vpc-0263a09e73d00080c"
+        }
+      }
+    }
+  }
+}

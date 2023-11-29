@@ -1,32 +1,13 @@
-#  s3 bucket
-Parameters:
-  MyBucketName:
-    Type: String
-    Description: User has to enter the Bucket Name
-    Default: cameo1308
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Exercise-1: Create S3 bucket",
+    "Resources": {
+        "mys3bucket": {
+            "Type" : "AWS::S3::Bucket",
+            "Properties": {
+                "BucketName": "practice"
+            }
+        }
 
-Resources:
-  MyS3Bucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: 
-        Ref: MyBucketName
-
-  MyBucketPolicy:
-    Type: AWS::S3::BucketPolicy
-    Properties:
-      Bucket:
-        Ref: MyS3Bucket
-      PolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Action:
-              - 's3:GetObject'
-            Effect: Allow
-            Resource: !Join
-              - ''
-              - - 'arn:aws:s3:::'
-                - !Ref MyS3Bucket
-                - /*
-            Principal: '*'       
-     
+    }
+}
